@@ -9,6 +9,7 @@
     "cancel_open_orders_on_exit": true,
     "unfilledtimeout": {
         "buy": 10,
+        "sell":15,
         "unit": "minutes"
     },
     "order_types": {
@@ -93,7 +94,7 @@
     },
     "pairlists": [
         {
-			"method": "StaticPairList",
+			"method": "VolumePairList",
 			"number_assets": 75,
 			"sort_key": "quoteVolume",
 			"refresh_period": 1800
@@ -109,8 +110,20 @@
 			"lookback_days": 3,
 			"min_rate_of_change": 0.1,
 			"refresh_period": 1800
-		}
-		
+		},
+		{
+			"method": "VolatilityFilter",
+			"lookback_days": 3,
+			"min_volatility": 0.02,
+			"max_volatility": 0.75,
+			"refresh_period": 43200
+        },
+        {
+			"method": "VolumePairList",
+			"number_assets": 50,
+			"sort_key": "quoteVolume"
+		},
+        {"method": "ShuffleFilter"}
     ],
     "api_server": {
         "enabled": true,
